@@ -16,24 +16,21 @@ export default function EditActivity() {
     const updatedActivity = { type, time, user, pitch };
 
     axios
-      .put(
-        `${process.env.REACT_APP_SERVER_URL}/activities/${activityId}`,
-        updatedActivity
-      )
+      .put(`http://localhost:5005/activities/${activityId}`, updatedActivity)
       .then(() => navigate(`/`))
       .catch((err) => console.log(err));
   };
 
   const deleteActivity = () => {
     axios
-      .delete(`${process.env.REACT_APP_SERVER_URL}/activities/${activityId}`)
+      .delete(`http://localhost:5005/activities/${activityId}`)
       .then(() => navigate("/"))
       .catch((err) => console.log(err));
   };
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_SERVER_URL}/activities/${activityId}`)
+      .get(`http://localhost:5005/activities/${activityId}`)
       .then((response) => {
         setType(response.data.type);
         setTime(response.data.time);
@@ -45,7 +42,7 @@ export default function EditActivity() {
   return (
     <div>
       <form onSubmit={handleSubmit} className="mt-3">
-        <divider className="text-xl font-bold p-4">Edit Activity</divider>
+        <h1 className="text-xl font-bold p-4">Edit Activity</h1>
 
         <div>
           <select
@@ -56,7 +53,6 @@ export default function EditActivity() {
             name="type"
             value={type}
           >
-            <option selected>Select an activity</option>
             <option value="Mowing">Mowing</option>
             <option value="Fertilisation">Fertilisation</option>
             <option value="Irrigation">Irrigation</option>
@@ -84,7 +80,6 @@ export default function EditActivity() {
             name="user"
             value={user}
           >
-            <option selected>Select a caretaker</option>
             <option value="John">John</option>
             <option value="Tom">Tom</option>
             <option value="Tony">Tony</option>
@@ -100,16 +95,25 @@ export default function EditActivity() {
             name="pitch"
             value={pitch}
           >
-            <option selected>Select a pitch</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
           </select>
         </div>
 
-        <button type="submit" className="bg-gray-200 border-solid border-2 border-gray-400 rounded p-1 shadow-md m-2">Save Changes</button>
+        <button
+          type="submit"
+          className="bg-gray-200 border-solid border-2 border-gray-400 rounded p-1 shadow-md m-2"
+        >
+          Save Changes
+        </button>
         <div>
-          <button onClick={deleteActivity} className="bg-red-700 text-white border-solid border-2 border-gray-400 rounded p-1 shadow-md mb-3">Delete Activity</button>
+          <button
+            onClick={deleteActivity}
+            className="bg-red-700 text-white border-solid border-2 border-gray-400 rounded p-1 shadow-md mb-3"
+          >
+            Delete Activity
+          </button>
         </div>
       </form>
     </div>

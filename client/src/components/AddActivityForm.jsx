@@ -18,7 +18,7 @@ export default function AddActivityForm({ refreshActivities, activities }) {
     };
 
     axios
-      .post(`${process.env.REACT_APP_SERVER_URL}/activities`, newActivity)
+      .post(`http://localhost:5005/activities`, newActivity)
       .then(() => {
         setType("");
         setTime("");
@@ -30,14 +30,12 @@ export default function AddActivityForm({ refreshActivities, activities }) {
   };
 
   const pitchAvailable = (pitchNum) => {
-    if(activities.filter((act) => act.pitch === pitchNum).length >= 1){
-      return <option>Pitch {pitchNum} in use</option>
-     } else {
-      return <option value={pitchNum}>{pitchNum}</option>
-     }
+    if (activities.filter((act) => act.pitch === pitchNum).length >= 1) {
+      return <option>Pitch {pitchNum} in use</option>;
+    } else {
+      return <option value={pitchNum}>{pitchNum}</option>;
+    }
   };
-
-  console.log(activities.filter((act) => act.pitch === 1));
 
   return (
     <div>
@@ -77,7 +75,9 @@ export default function AddActivityForm({ refreshActivities, activities }) {
             onChange={(event) => setUser(event.target.value)}
             name="user"
           >
-            <option selected>Select a caretaker</option>
+            <option defaultValue={"Select a caretaker"}>
+              Select a caretaker
+            </option>
             <option value="John">John</option>
             <option value="Tom">Tom</option>
             <option value="Tony">Tony</option>
@@ -91,14 +91,19 @@ export default function AddActivityForm({ refreshActivities, activities }) {
             onChange={(event) => setPitch(event.target.value)}
             name="pitch"
           >
-            <option selected>Select a pitch</option>
+            <option defaultValue={"Select a pitch"}>Select a pitch</option>
             {pitchAvailable(1)}
             {pitchAvailable(2)}
             {pitchAvailable(3)}
           </select>
         </div>
 
-        <button type="submit" className="bg-gray-200 border-solid border-2 border-gray-400 rounded p-1 shadow-md m-3">Create Activity</button>
+        <button
+          type="submit"
+          className="bg-gray-200 border-solid border-2 border-gray-400 rounded p-1 shadow-md m-3"
+        >
+          Create Activity
+        </button>
       </form>
     </div>
   );

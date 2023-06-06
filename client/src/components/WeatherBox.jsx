@@ -4,10 +4,12 @@ import { useState, useEffect } from "react";
 export default function WeatherBox() {
   const [weather, setWeather] = useState();
 
+  const weatherKey = "INSERT YOUR OPENWEATHERMAP API KEY HERE";
+
   useEffect(() => {
     axios
       .get(
-        `https://api.openweathermap.org/data/2.5/weather?q=berlin&appid=${process.env.REACT_APP_API_KEY}`
+        `https://api.openweathermap.org/data/2.5/weather?q=berlin&appid=${weatherKey}`
       )
       .then((response) => {
         setWeather(response.data);
@@ -22,9 +24,9 @@ export default function WeatherBox() {
           <p>Temperature: {Math.floor(weather.main.temp) / 10}</p>
           <p>Conditions: {weather.weather[0].description}</p>
         </div>
-      ) 
-      :
-      <h1>Loading weather</h1>}
+      ) : (
+        <h1>Loading weather</h1>
+      )}
     </div>
   );
 }
