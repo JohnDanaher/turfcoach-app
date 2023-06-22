@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 export default function WeatherBox() {
   const [weather, setWeather] = useState();
 
-  const weatherKey = "eeba6e25a39a6f771c2c3d1f5b396049";
+  const weatherKey = "YOUR OPENWEATHERMAP KEY GOES HERE";
 
   useEffect(() => {
     axios
