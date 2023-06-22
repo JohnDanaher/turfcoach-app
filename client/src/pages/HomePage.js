@@ -11,7 +11,7 @@ export default function HomePage() {
 
   const getActivities = () => {
     axios
-      .get(`${process.env.REACT_APP_SERVER_URL}/activities`)
+      .get(`http://localhost:5005/activities`)
       .then((res) => setActivities(res.data))
       .catch((err) => console.log(err));
   };
